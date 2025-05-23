@@ -23,6 +23,12 @@ echo "${BLUE_TEXT}${BOLD_TEXT}         INITIATING EXECUTION...  ${RESET_FORMAT}"
 echo "${BLUE_TEXT}${BOLD_TEXT}=======================================${RESET_FORMAT}"
 echo
 
+gcloud auth list
+
+gcloud config list project
+
+export PROJECT_ID=$DEVSHELL_PROJECT_ID
+
 # Instruction 1
 echo -e "${YELLOW_TEXT}${BOLD_TEXT}Step 1: Creating redact-request.json file for de-identification.${RESET_FORMAT}"
 echo -e "${CYAN_TEXT}This file contains the data to be redacted and the configuration for the de-identification process.${RESET_FORMAT}"
@@ -60,7 +66,7 @@ echo -e "${CYAN_TEXT}This step sends the content of redact-request.json to the D
 curl -s \
   -H "Authorization: Bearer $(gcloud auth print-access-token)" \
   -H "Content-Type: application/json" \
-  https://dlp.googleapis.com/v2/projects/$DEVSHELL_PROJECT_ID/content:deidentify \
+  https://dlp.googleapis.com/v2/projects/$DEVSHELL_PROJECT_ID/locations/us/content:deidentify \
   -d @redact-request.json -o redact-response.txt
 
 # Copy response to Google Cloud Storage
@@ -118,7 +124,7 @@ echo -e "${CYAN_TEXT}This step sends the structured data template to the DLP API
 curl -s \
 -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
 -H "Content-Type: application/json" \
-https://dlp.googleapis.com/v2/projects/$DEVSHELL_PROJECT_ID/deidentifyTemplates \
+https://dlp.googleapis.com/v2/projects/$DEVSHELL_PROJECT_ID/locations/us/deidentifyTemplates \
 -d @template.json
 
 # Instruction 4
@@ -169,7 +175,7 @@ echo -e "${CYAN_TEXT}This step sends the unstructured data template to the DLP A
 curl -s \
 -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
 -H "Content-Type: application/json" \
-https://dlp.googleapis.com/v2/projects/$DEVSHELL_PROJECT_ID/deidentifyTemplates \
+https://dlp.googleapis.com/v2/projects/$DEVSHELL_PROJECT_ID/locations/us/deidentifyTemplates \
 -d @template.json
 
 # Output the URLs for the templates
@@ -526,6 +532,4 @@ echo
 echo "${GREEN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
 echo "${GREEN_TEXT}${BOLD_TEXT}              LAB COMPLETED SUCCESSFULLY!              ${RESET_FORMAT}"
 echo "${GREEN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
-echo ""
-echo -e "${RED_TEXT}${BOLD_TEXT}Subscribe our Channel:${RESET_FORMAT} ${BLUE_TEXT}${BOLD_TEXT}https://www.youtube.com/@Arcade61432${RESET_FORMAT}"
-echo
+echo 
