@@ -13,7 +13,7 @@
 * Run in Cloudshell:*
 
 ```bash
-curl -LO raw.githubusercontent.com/ArcadeCrew/Google-Cloud-Labs/refs/heads/main/Get%20Started%20with%20Sensitive%20Data%20Protection%20Challenge%20Lab/arc116.sh
+curl -LO raw.githubusercontent.com/tranduchuyhcmit/Google-Cloud-Labs/refs/heads/main/ARC116/arc116.sh
 sudo chmod +x arcadecrew.sh
 ./arc116.sh
 ```
