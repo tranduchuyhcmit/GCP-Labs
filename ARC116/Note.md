@@ -14,7 +14,7 @@
 
 ```bash
 curl -LO raw.githubusercontent.com/tranduchuyhcmit/Google-Cloud-Labs/refs/heads/main/ARC116/arc116.sh
-sudo chmod +x arcadecrew.sh
+sudo chmod +x arc116.sh
 ./arc116.sh
 ```
 
